@@ -30,7 +30,6 @@ class TestHeader:
         #Переключаемся на открывшеюся страницу
         new_window = self.driver.window_handles[1]
         self.driver.switch_to.window(new_window)
-        #base_page.wait_for_click((By.XPATH, "//button[text()='Найти']"))
 
         #Проверяем адрес текущей страницы
         assert base_page.check_current_url("https://dzen.ru/?yredirect=true", Hl.BUTTON_SEARCH_DZEN)
