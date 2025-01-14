@@ -15,7 +15,7 @@ class TestHeader:
 
     @allure.title('Проверка открытия страницы "Дзен" по нажатию на логотип "Яндекс"')
     @allure.description('На странице Дзен ждем загрузки кнопки "Найти" и проверяем фактическую страницу с ожидаемой')
-    @allure.link("https://dzen.ru/?yredirect=true", name='Ожидаемая страница')
+    @allure.link(Sc.URL_DZEN, name='Ожидаемая страница')
     def test_yandex_logo_redirect(self): #Проверка открытия страницы "Дзен" по нажатию на логотип "Яндекс"
 
         #Открываем домашнюю страницу "Яндекс Самокат"
@@ -32,7 +32,7 @@ class TestHeader:
         self.driver.switch_to.window(new_window)
 
         #Проверяем адрес текущей страницы
-        assert base_page.check_current_url("https://dzen.ru/?yredirect=true", Hl.BUTTON_SEARCH_DZEN)
+        assert base_page.check_current_url(Sc.URL_DZEN, Hl.BUTTON_SEARCH_DZEN)
 
     @allure.title('Проверка открытия домашней страницы по нажатию на логотип "Самокат"')
     @allure.description('На Домашней странице ждем загрузки кнопки "Заказать" и проверяем фактическую страницу с ожидаемой')
