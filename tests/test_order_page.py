@@ -1,7 +1,7 @@
 import allure
 import pytest
 from config import StoreConfig as Sc
-from conftest import setup_class, teardown_class
+from conftest import driver
 from locators.order_page_locators import OrderForm as Of
 from locators.base_page_locators import HeaderLocators as Hl
 from pages.order_page import OrderPage
@@ -9,10 +9,6 @@ from pages.order_page import OrderPage
 
 class TestOrder:
 
-    @classmethod
-    def setup_class(cls):
-        # создали драйвер для браузера
-        cls.driver = setup_class()
 
     @pytest.mark.parametrize(
         'customer, rental_details',
@@ -35,12 +31,12 @@ class TestOrder:
         'Проверка возможности забронировать самокат')
     @allure.description(
         'Заполняем формы заказа, данными заказчика и деталями заказа, проверяем появления окна успеха, в котором ждем видимость кнопки "Проверить статус"')
-    def test_rent_order(self, customer, rental_details): #Проверка оформления заказа
+    def test_rent_order(self, customer, rental_details, driver): #Проверка оформления заказа
         # Открытие страницы магазина
-        self.driver.get(Sc.URL_YA_SCOOTER)
+        driver.get(Sc.URL_YA_SCOOTER)
 
         # Создаем объект класса базовой страницы
-        order_page = OrderPage(self.driver)
+        order_page = OrderPage(driver)
 
         #Переходим на страницу оформления заказа
         order_page.click_element(Hl.BUTTON_HEADER_ORDER)
@@ -56,12 +52,3 @@ class TestOrder:
 
         #Проверка наличия модального окна "Заказ оформлен" по кнопке "Посмотреть статус"
         assert order_page.check_is_displayed(Of.BUTTON_ORDER_VIEW_STATUS)
-
-
-
-
-
-    @classmethod
-    def teardown_class(cls):
-        # Закрываем браузер
-        teardown_class(cls)

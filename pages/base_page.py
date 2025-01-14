@@ -52,6 +52,3 @@ class BasePage: #Класс с базовыми методами
         actual_url = self.driver.current_url
         return actual_url == expect_url
 
-
-
-
